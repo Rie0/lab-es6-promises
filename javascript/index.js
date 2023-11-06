@@ -37,4 +37,23 @@
 // ...
 
 // Bonus 2 - Promise all
-// ...
+const brusselsPromises = []; // Create an array of Promises to fetch Brussels Sprouts instructions
+
+for (let step = 0; step < brusselsSprouts.length; step++) {
+  brusselsPromises.push(
+    obtainInstruction("brusselsSprouts", step)
+  );
+}
+
+Promise.all(brusselsPromises)
+  .then((steps) => {
+    const brusselsList = document.querySelector("#brusselsSprouts");
+
+    steps.forEach((stepInstruction) => {
+      brusselsList.innerHTML += `<li>${stepInstruction}</li>`;
+    });
+
+    // Add an additional <li> to indicate Brussels Sprouts are ready
+    brusselsList.innerHTML += '<li>Brussels sprouts are ready!</li>';
+  })
+  .catch((error) => console.log(error));
